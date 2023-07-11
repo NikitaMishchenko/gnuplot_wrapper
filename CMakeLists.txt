@@ -18,11 +18,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpic")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
-add_library (gnuplot_wrapper SHARED
+add_library (gnuplot_wrapper #SHARED
              ./src/gnuplot/gnuplot_wrapper.h
              ./src/gnuplot/gnuplot_1d.h
              )
-set_target_properties(gnuplot_wrapper PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(gnuplot_wrapper PROPERTIES LINKER_LANGUAGE CXX PUBLIC_HEADER gnuplot_1d.h)
 target_link_libraries(gnuplot_wrapper
                       libboost_iostreams.a
                       libboost_system.a
@@ -44,7 +44,10 @@ target_link_libraries(runTests
                      ${GTEST_LIBRARIES}
                      gnuplot_wrapper
                      -pthread
-                     -lpthread)
+                     -lpthread
+                     -lboost_iostreams
+                     -lboost_system
+                     -lboost_filesystem)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
