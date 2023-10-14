@@ -18,8 +18,11 @@ TEST(TestOfTest, test1)
     ASSERT_TRUE(true);
 }
 
+// WORKS FROM TERMINAL (not from ide terminal)
 TEST(TestGnuplot, BasicTest)
 {
+    std::cout << "WORKS FROM TERMINAL (not from ide terminal)\n";
+
     {
         const size_t size = 100;
 
